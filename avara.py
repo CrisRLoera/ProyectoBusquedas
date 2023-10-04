@@ -163,9 +163,9 @@ def selection(wordSerch):
 ListStates=[A,B,C,D,E,F,G,H,I,J]
 CurrentS = []
 EndS = []
-print("Ingrese el nodo inicial en mayusculas: ")
+print("Ingrese el estado inicial en mayusculas: ")
 CurrentS.append(selection(input()))
-print("Ingrese el nodo inicial en mayusculas: ")
+print("Ingrese el estado final en mayusculas: ")
 EndS.append(selection(input()))
 print("Ingrese el limite de intentos: ")
 trys=int(input())
