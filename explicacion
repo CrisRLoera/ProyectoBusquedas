@@ -1,0 +1,58 @@
+El módulo heapq, que se utilizará para mantener una cola de prioridad para el algoritmo A*.
+
+Definimos la función astar(grafo, start, goal) que implementa el algoritmo A*. Esta función toma tres argumentos:
+
+grafo: Un diccionario que representa el grafo donde las claves son los nodos y los valores son diccionarios de vecinos con sus respectivos costos.
+start: El nodo inicial desde donde comenzará la búsqueda.
+goal: El nodo objetivo al que se desea llegar.
+Inicializamos las estructuras de datos necesarias, como open_set para la cola de prioridad, came_from para registrar los nodos visitados, g_score para el costo real desde el nodo inicial hasta cada nodo y f_score para el costo estimado total desde el nodo inicial hasta cada nodo.
+
+Creamos una lista nodos_recorridos para registrar los nodos que se visitan durante la ejecución del algoritmo.
+
+Iniciamos un bucle while que se ejecutará mientras haya nodos en open_set.
+
+En cada iteración, extraemos el nodo con el menor valor de f_score de open_set y lo asignamos a current. Este es el nodo actual en el que estamos trabajando.
+
+Comprobamos si current es igual a goal. Si es así, hemos encontrado el camino y llamamos a la función reconstruct_path para reconstruir el camino desde start hasta goal y retornamos el camino junto con la lista de nodos_recorridos.
+
+Si current no es igual a goal, iteramos sobre los vecinos de current y calculamos el costo tentativo desde start hasta el vecino. Si este costo tentativo es menor que el costo actual registrado en g_score para el vecino, actualizamos los registros.
+
+Luego, calculamos el valor f_score para el vecino y lo agregamos a open_set para su consideración en futuras iteraciones.
+
+Una vez que el bucle while termina y no se encuentra un camino, retornamos None para indicar que no se encontró un camino.
+
+Definimos la función heuristico(node, goal) que calcula la heurística entre dos nodos. En este caso, calculamos la distancia Euclidiana entre las letras de los nodos.
+
+Definimos la función reconstruct_path(came_from, current) que reconstruye el camino desde start hasta goal utilizando el diccionario came_from.
+
+Definimos el grafo grafo, el nodo inicial ini y el nodo objetivo meta.
+
+Solicitamos al usuario que introduzca el nodo inicial y el nodo objetivo, y convertimos las entradas a mayúsculas usando el método upper().
+
+Llamamos a la función astar para encontrar el camino y obtener la lista de nodos_recorridos.
+
+Si se encuentra un camino, imprimimos el camino encontrado y la lista de nodos recorridos. Si no se encuentra un camino, imprimimos un mensaje indicando que no se encontró un camino.
+
+
+-----
+
+primero mejor
+Inicialización de variables: Se crean conjuntos y listas para rastrear nodos visitados, una cola de prioridad para exploración y una lista de nodos recorridos.
+
+Bucle principal de búsqueda: Se busca en el grafo desde el nodo inicial hacia el objetivo hasta que no hay más nodos en la cola de prioridad.
+
+Extracción del nodo de menor costo: Se extrae el nodo de la cola de prioridad con el menor costo acumulado.
+
+Verificación de visitados: Se verifica si el nodo actual no ha sido visitado. Si no se ha visitado, se marca como visitado y se agrega a la lista de nodos recorridos.
+
+Verificación de nodo objetivo: Si el nodo actual es el objetivo, se imprime el camino y se termina la búsqueda.
+
+Exploración de vecinos: Si el nodo actual no es el objetivo, se exploran sus vecinos, se calculan los costos y se agregan a la cola de prioridad.
+
+Mensaje de no encontrar el objetivo: Si no se encuentra el objetivo, se imprime un mensaje de que no se encontró.
+
+Definición del grafo: Se define el grafo que representa las conexiones entre nodos y sus costos.
+
+Entrada del usuario: Se solicita al usuario ingresar el nodo inicial y el nodo objetivo.
+
+Llamada a la función de búsqueda: Se llama a la función de búsqueda con los valores ingresados por el usuario.

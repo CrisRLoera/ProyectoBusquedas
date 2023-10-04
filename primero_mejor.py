@@ -3,29 +3,31 @@ import heapq
 def primero_mejor(grafo, inicio, meta):
     visitados = set()
     priority_queue = [(0, inicio, [inicio])]
+    nodos_recorridos = []  
     
     while priority_queue:
         _, node, path = heapq.heappop(priority_queue)
         
         if node not in visitados:
             visitados.add(node)
-            print(f"Visitando nodo: {node}")
+            nodos_recorridos.append(node)  
             
             if node == meta:
-                print("Camino: ", ' -> '.join(path))
+                camino = f"Camino de {inicio} a {meta}: {path}"
+                print("Nodos recorridos:", nodos_recorridos) 
+                print(camino)
                 return True
             
             neighbors = grafo.get(node, {})
             for neighbor, weight in sorted(neighbors.items(), key=lambda x: x[1]):
                 if neighbor not in visitados:
                     new_path = path + [neighbor]
-                    priority = weight  # Utilizamos el peso del enlace como valor heurístico
+                    priority = weight  
                     heapq.heappush(priority_queue, (priority, neighbor, new_path))
     
     print("No se encontró el objetivo")
     return False
 
-# Grafo
 grafo = {
     'H': {'E': 4.0, 'B': 3.2, 'F': 3.5},
     'E': {'H': 4.0, 'A': 4.5, 'C': 3.4},
@@ -39,8 +41,6 @@ grafo = {
     'J': {'I': 6.4, 'D': 4.6, 'G': 6.8}
 }
 
-
-nodo_inicial = 'H'
-nodo_meta = 'J'
-
-primero_mejor(grafo, nodo_inicial, nodo_meta)
+ini = input("Introduce el nodo inicial: ").upper()
+meta = input("Introduce el nodo objetivo: ").upper()
+primero_mejor(grafo, ini, meta)

@@ -1,18 +1,21 @@
 import heapq
 
 def astar(grafo, start, goal):
-    open_set = [(0, start)]  
-    came_from = {}  
+    open_set = [(0, start)]
+    came_from = {}
     g_score = {node: float('inf') for node in grafo}
     g_score[start] = 0
     f_score = {node: float('inf') for node in grafo}
     f_score[start] = heuristico(start, goal)
+    
+    nodos_recorridos = []
 
     while open_set:
         _, current = heapq.heappop(open_set)
+        nodos_recorridos.append(current) 
 
         if current == goal:
-            return reconstruct_path(came_from, current)
+            return reconstruct_path(came_from, current), nodos_recorridos
 
         for neighbor, cost in grafo[current].items():
             tentative_g_score = g_score[current] + cost
@@ -23,7 +26,7 @@ def astar(grafo, start, goal):
                 f_score[neighbor] = g_score[neighbor] + heuristico(neighbor, goal)
                 heapq.heappush(open_set, (f_score[neighbor], neighbor))
 
-    return None  
+    return None, nodos_recorridos
 
 def heuristico(node, goal):
     x1, y1 = ord(node) - ord('A'), ord(goal) - ord('A')
@@ -49,12 +52,12 @@ grafo = {
     'J': {'I': 6.4, 'D': 4.6, 'G': 6.8}
 }
 
-ini = 'A'
-meta = 'D'
-
-camino = astar(grafo, ini, meta)
+ini = input("Introduce el nodo inicial: ").upper()
+meta = input("Introduce el nodo objetivo: ").upper()
+camino, nodos_recorridos = astar(grafo, ini, meta)
 
 if camino:
+    print(f"Nodos recorridos: {nodos_recorridos}")
     print(f"Camino de {ini} a {meta}: {camino}")
 else:
     print(f"No se encontró un camino de {ini} a {meta}.")
